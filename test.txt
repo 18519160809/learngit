@@ -1,0 +1,125 @@
+1.定义一个函数求：有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问每个月的兔子总数为多少？
+#coding:utf-8
+def count1(n):
+    last = 1
+    now = 1
+    next = 1
+    for i in range(n):
+        if i < 2:
+            next1 = 1
+        else:
+            next = last + now
+            last = now
+            now = next
+        print next,
+    return next
+print '\n最终结果是%d' % (count1(16))
+
+2.MySQL，redis，http，https的默认端口号是多少？
+MySQL：3306
+http：40
+https：443
+redis：6379
+
+3.请分别求出今天是本年、本月、本周的第几天？
+# -*- coding:utf-8 -*-
+import datetime
+nowtime1 = datetime.datetime.now().strftime('%Y-%m-%d').split('-')
+today  = nowtime1[2]
+d=datetime.datetime.now()
+weekday = d.weekday()+1
+dt = datetime.datetime(int(nowtime1[0]), int(nowtime1[1]), int(nowtime1[2]))
+print("是第"+dt.strftime("%j")+"天")
+print '是本月第%s天'%today
+print '是本周第%s天'%weekday
+
+4.统计一篇英文文章内每个单词的出现频率，并返回出现频率最高的前10个单词及其出现次数。
+import collections
+import re
+rf = open("aaa.txt", 'r')
+c = collections.Counter()
+c.update(re.findall(r'\b\w+\b', rf.read()))
+lenlist = c.most_common()
+for word in range(10):
+    print lenlist[word][0] +':' + str(lenlist[word][1])
+rf.close()
+
+5.现有字典d={‘a’:24,’g’:52,’l’:12,’k’:33}请按字典中的value值进行排序？
+sorted(d.items(),key = lambda x:x[1])
+
+6.a=1,b=2,不用中间变量交换a和b的值？
+a=a+b
+b=a-b
+a=a-b
+
+7.输入一行字符，分别统计出其中英文字母、空格、数字和其它字符的个数？
+1 #!/usr/bin/python 
+2 #-*- coding:utf-8 -*- 
+3 #there is no ++ operator in Python 
+4 import string 5
+ def main(): 
+6     s = raw_input('input a string:') 
+7     letter = 0 
+8     space = 0 
+9     digit = 0
+10     other = 0
+11     for c in s:
+12         if c.isalpha():
+13             letter+=1
+14         elif c.isspace():
+15             space+=1
+16         elif c.isdigit():
+17             digit+=1
+18         else:
+19             other+=1
+20     print 'There are %d letters,%d spaces,%d digits and %d other characters in your string.'%(letter,space,digit,other)
+21  if __name__ == '__main__':
+23     main()
+
+8.map函数和reduce函数的区别？
+①从参数方面来讲：
+map()包含两个参数，第一个是参数是一个函数，第二个是序列（列表或元组）。其中，函数（即map的第一个参数位置的函数）可以接收一个或多个参数。
+reduce() 第一个参数是函数，第二个是 序列（列表或元组）。但是，其函数必须接收两个参数。
+②从对传进去的数值作用来讲：
+map()是将传入的函数依次作用到序列的每个元素，每个元素都是独自被函数“作用”一次；（请看下面的栗子）
+reduce()是将传入的函数作用在序列的第一个元素得到结果后，把这个结果继续与下一个元素作用（累积计算）。
+
+9.有一个已经排好序的数组l = [0,10,20,30,40,50]。现输入一个数，要求按原来的规律将它插入数组中
+
+
+
+
+
+l = [0,10,20,30,40,50]
+cnt = len(l)
+n = int(raw_input('Input a number:'))
+l.append(n)
+for i in range(cnt):
+    if n<l[i]:
+       for j in range(cnt,i,-1):
+           print cnt,i
+           l[j] = l[j-1]
+       l[i] = n
+       break
+print 'The new sorted list is:',l
+
+10.求输出结果
+def num():
+   return [lambda x:i*x for i in range(4)]
+print [m(2) for m in num()]
+[6, 6, 6, 6]
+列表推导式保存了4个函数对象，调用函数的时候才会对 i 赋值。i 保存的值是3
+
+11.去列表里面最大值
+import numpy
+	list=[1,3,5,7]
+	list.remove(numpy.max(list))
+    
+12.常用的反爬虫措施？
+1.添加代理
+2.降低访问频率
+	3. User-Agent
+4. 动态HTML数据加载
+5. 验证码处理
+6. Cookie
+
